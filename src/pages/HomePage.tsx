@@ -15,6 +15,7 @@ export function HomePage() {
   usePageMeta({
     title: 'Home',
     description: `${siteConfig.heroSupport} Explore original QA case studies and a fictional artifact library.`,
+    socialDescription: 'Manual QA across SaaS, AI-driven and FinTech products.',
   });
 
   return (
