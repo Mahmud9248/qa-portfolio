@@ -2,7 +2,8 @@
 
 A dark, editorial portfolio for a manual software quality assurance engineer. The site pairs a detailed professional record with three interactive QA case dossiers and a searchable library of sample artifacts.
 
-Source: https://github.com/Mahmud9248/qa-portfolio
+Source: https://github.com/Mahmud9248/qa-portfolio  
+Live: https://mahmudqa.pages.dev/
 
 Built with React, TypeScript, Vite, React Router and Motion. All fonts and images are self-hosted. The build is a static bundle intended for Cloudflare Pages.
 
@@ -143,9 +144,9 @@ Manual QA is the subject of the site. No automated-testing expertise is implied 
 - Social image URLs are made absolute from the current origin so shared links resolve correctly after deployment.
 - The home page includes valid `Person` JSON-LD built from the résumé facts.
 - The 404 route sets `robots` to `noindex, nofollow`.
-- `public/robots.txt` is valid and intentionally contains no `Sitemap:` entry until a production domain exists.
+- `public/robots.txt` is valid and intentionally contains no `Sitemap:` entry until the final custom domain is confirmed.
 - `public/_headers` adds security headers plus long-lived cache headers for `/images/*` and `/assets/*`.
-- `public/_redirects` provides the SPA fallback: `/* /index.html 200`.
+- `public/_redirects` is retained as a compatibility fallback. The live Pages project also serves `index.html` for unknown paths, which keeps direct deep links working.
 
 After the final domain is known, update the canonical/social base if needed, add a sitemap, and add its absolute URL to `robots.txt`. The current runtime metadata uses `window.location.origin`, so no domain is hard-coded.
 
@@ -153,34 +154,46 @@ After the final domain is known, update the canonical/social base if needed, add
 
 ## Cloudflare Pages
 
-No deployment has been performed and no DNS or Cloudflare settings have been changed.
-
-Recommended Pages settings:
+The site is live at **https://mahmudqa.pages.dev/**. It deploys from the `main` branch of the GitHub repository through Cloudflare Pages.
 
 | Setting | Value |
 | --- | --- |
-| Project name | choose a project name |
+| Project name | `mahmudqa` |
 | Root directory | repository root (leave blank) |
-| Framework preset | Vite |
+| Framework preset | Vite / React Router (detected) |
 | Build command | `npm run build` |
 | Build output directory | `dist` |
-| Node version | `22` via `NODE_VERSION` environment variable |
+| Node version | 22 (build image selected 22.22.0) |
 
-The project is at the repository root, so no Pages root-directory override is needed.
+The production deployment `7bf482a7-19e5-457d-90f1-fb62a010fe48` completed successfully on 22 October 2026. The build log confirmed Node 22.22.0, `npm ci`, `npm run build`, a successful Vite build and the upload of `dist/`.
 
 The files in `public/` are copied into `dist/` by Vite:
 
-- `_redirects` keeps direct links to case studies and artifacts working on refresh.
+- `_redirects` is retained as a compatibility fallback. Cloudflare Pages also serves `index.html` for unknown paths, so direct links to case studies and artifacts work on refresh.
 - `_headers` applies security and cache policy at the Pages edge.
 - `robots.txt`, favicon, portrait variants and the résumé PDF are included.
 
-If deploying via the Cloudflare dashboard, connect the repository and use the settings above. If using Wrangler, run this **only after deployment is explicitly approved**:
+If reconnecting or replacing the project, connect the repository and use the settings above. If using Wrangler, run this only after deployment is explicitly approved:
 
 ```bash
-npx wrangler pages deploy dist --project-name <project-name>
+npx wrangler pages deploy dist --project-name mahmudqa
 ```
 
 Add a custom domain and DNS records only with the owner's approval. Preview deployments are suitable for review before any production DNS change.
+
+### Live deployment checks
+
+Verified against `https://mahmudqa.pages.dev/` after the successful production deployment:
+
+- `/` serves the built bundle, not the source `/src/main.tsx` entry.
+- `/`, `/about`, `/qa-artifacts`, `/case-studies` and `/case-studies/financial-validation` return HTML and render the expected route.
+- Unknown paths fall through to the SPA and render the in-app 404.
+- `/assets/index-DT_RvWjB.js` returns `application/javascript`.
+- `/images/profile-768.avif` returns `image/avif`.
+- `/documents/resume.pdf` returns `application/pdf`.
+- `/robots.txt` returns `text/plain`.
+- `_headers` is applied at the edge: security headers are present, `/assets/*` and `/images/*` are immutable for one year, and the résumé is served inline for one hour.
+- Home, About, Case Studies, Case Study 01 and QA Artifacts were loaded in a browser with no console errors; the 404 was also verified through the fallback.
 
 ### SPA 404 note
 
@@ -231,6 +244,7 @@ The current build was verified with:
 - Lighthouse on the local production build — Accessibility 100, Best Practices 100, SEO 100
 - Latest post-fix audit (21 October 2026) — interaction 34/34, demos 15/15, responsive 27/27; Lighthouse Accessibility 100, Best Practices 100, SEO 100 on both home and the artifact library.
 - Final layout and asset check — hero annotation hidden at 980 px and below, clear of the portrait and copy at 981/1024/1180/1440 px; WalletHub and Codemen masks return 200 and render in both the experience summary and timeline headings; the Redshift glyph uses the AWS path with `evenodd` fill.
+- Live Cloudflare Pages deployment (22 October 2026) — production build `npm run build` succeeded on Node 22.22.0; home, About, Case Studies, Case Study 01, QA Artifacts, résumé PDF, portrait AVIF, built JavaScript and `robots.txt` returned the expected content types; no console errors were recorded on the rendered routes.
 
 See `HANDOVER.md` for the detailed verification record and known limitations.
 
@@ -241,5 +255,5 @@ See `HANDOVER.md` for the detailed verification record and known limitations.
 - The three case studies and ten artifacts are fictional demonstrations, not employer case studies.
 - Data tables inside some narrow-screen case-study and artifact panels scroll horizontally by design.
 - The unknown-route HTTP response status is 200 because of the SPA fallback, while the rendered page is an in-app 404 with `noindex`.
-- No sitemap is included until a production domain is confirmed.
+- No sitemap is included while the final custom domain is pending; the Pages URL is live.
 - Social metadata is applied by the client after hydration. The static HTML includes baseline metadata for crawlers and link previews, but a fully static per-route social preview would require pre-rendering.

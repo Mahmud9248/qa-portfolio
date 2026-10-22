@@ -1,7 +1,8 @@
 # Handover — Abdullah Al Mahmud QA Portfolio
 
 **Date:** 22 October 2026  
-**Status:** Implementation complete, locally verified and published as a public GitHub repository. **Site not deployed.**  
+**Status:** Implementation complete, locally verified, published as a public GitHub repository, and deployed to Cloudflare Pages.  
+**Live site:** https://mahmudqa.pages.dev/  
 **Repository:** https://github.com/Mahmud9248/qa-portfolio  
 **Project folder:** `qa-portfolio/` (repository root)  
 **Production output:** `dist/`
@@ -84,6 +85,31 @@ Additional checks:
 - `robots.txt` returns `200 text/plain`.
 - `_headers` and `_redirects` are present in `dist/`.
 
+### Live Cloudflare Pages deployment
+
+The production project is `mahmudqa` at https://mahmudqa.pages.dev/. The first deployment served the repository root because the build command was blank and the output directory was `.`. The build configuration was corrected to `npm run build` with output `dist`, and deployment `7bf482a7-19e5-457d-90f1-fb62a010fe48` was created successfully on 22 October 2026.
+
+Deployment log highlights:
+
+- Node 22.22.0 and npm 10.9.2 were selected by the build image.
+- `npm ci` installed 44 packages.
+- `npm run build` ran `tsc --noEmit && vite build`; Vite transformed 2,413 modules and completed successfully.
+- The output directory validation passed and 46 assets were uploaded.
+- Cloudflare reported `Success: Your site was deployed!`.
+
+Live checks after deployment:
+
+- The home page serves the built `/assets/index-DT_RvWjB.js` entry and no longer references `/src/main.tsx`.
+- `/`, `/about`, `/qa-artifacts`, `/case-studies` and `/case-studies/financial-validation` return `200 text/html` and render the expected route in a browser.
+- An unknown path returns the SPA shell and renders the in-app 404.
+- `/assets/index-DT_RvWjB.js` returns `application/javascript`.
+- `/images/profile-768.avif` returns `image/avif`.
+- `/documents/resume.pdf` returns `application/pdf`.
+- `/robots.txt` returns `text/plain`.
+- `_headers` is applied at the edge: the security headers are present, `/assets/*` and `/images/*` return `public, max-age=31536000, immutable`, and the résumé returns `public, max-age=3600` with `content-disposition: inline`.
+- No console errors were recorded while rendering the home, About, Case Studies, Case Study 01 and QA Artifacts routes.
+- The WalletHub and Codemen mask assets load from `/logos/` and render beside the timeline employer names.
+
 ### Interaction checks
 
 **34/34 artifact and navigation assertions passed**, covering:
@@ -155,23 +181,33 @@ SEO initially failed because `/robots.txt` fell through the SPA fallback. A vali
 
 ---
 
-## 5. Cloudflare Pages handoff
+## 5. Cloudflare Pages deployment
 
-The source is published in the public GitHub repository. No site deployment, DNS change or Cloudflare setting change has been performed.
-
-Recommended configuration when deployment is approved:
+The site is deployed through Cloudflare Pages from the `main` branch of the public GitHub repository.
 
 | Setting | Value |
 | --- | --- |
+| Project name | `mahmudqa` |
 | Root directory | repository root (leave blank) |
-| Framework preset | Vite |
+| Framework preset | Vite / React Router (detected) |
 | Build command | `npm run build` |
 | Build output directory | `dist` |
-| Node version | `22` via `NODE_VERSION` |
+| Node version | 22 (build image selected 22.22.0) |
+| Production branch | `main` |
+| Live URL | https://mahmudqa.pages.dev/ |
+
+Deployment record:
+
+- Production deployment: `7bf482a7-19e5-457d-90f1-fb62a010fe48`
+- Commit: `f9c733fc0c8029e7ef5e1f7a14c33cbcc6bb2d68`
+- Completed: 22 October 2026
+- Result: build and deploy stages succeeded
+
+The initial deployment used an empty build command and `.` as the output directory, so Cloudflare uploaded the repository root and served `/src/main.tsx` as `application/octet-stream`; React therefore never mounted. The corrected build configuration now runs `npm run build` and publishes `dist/`.
 
 Included deployment files:
 
-- `public/_redirects` → `/* /index.html 200` (copied to `dist/`)
+- `public/_redirects` → `/* /index.html 200` (retained as a compatibility fallback; Pages also serves `index.html` for unknown paths)
 - `public/_headers`:
   - Security headers: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy`
   - Immutable caching for `/images/*` and `/assets/*`
@@ -179,40 +215,42 @@ Included deployment files:
 - `public/robots.txt`
 - Résumé PDF, portrait variants, social image, icons and favicon
 
-Wrangler deployment command, **to be used only after explicit approval**:
+Wrangler deployment command for a manual fallback:
 
 ```bash
-npx wrangler pages deploy dist --project-name <project-name>
+npx wrangler pages deploy dist --project-name mahmudqa
 ```
 
-### Post-deployment checks (after approval)
+### Post-deployment checks
 
-1. Confirm every direct route in the table above loads on the Pages URL.
-2. Confirm `_headers` is applied at the edge.
-3. Confirm `robots.txt` is served as text/plain, not HTML.
-4. Check the OG image and canonical URL on the deployed origin.
-5. Confirm the résumé PDF downloads.
-6. Add the final custom domain and DNS records only with owner approval.
-7. Generate and add a sitemap using the final domain, then add its absolute URL to `robots.txt`.
-8. Re-run Lighthouse and social-preview debugging against the deployed domain.
+1. Every direct route in the table above loads on the Pages URL.
+2. The built JavaScript and CSS assets return 200 with the expected content types.
+3. `robots.txt` is served as text/plain.
+4. The résumé PDF downloads.
+5. The portrait AVIF and employer logo masks load.
+6. No console errors appear on the rendered routes.
+7. Add the final custom domain and DNS records only with owner approval.
+8. Generate and add a sitemap using the final domain, then add its absolute URL to `robots.txt`.
+9. Re-run Lighthouse and social-preview debugging against the deployed domain.
 
 ---
 
 ## 6. Known limitations and notes
 
 - **SPA 404 status:** unknown paths return HTTP 200 from the static host while rendering the in-app 404 with `noindex`. A true HTTP 404 would require route-aware rewrites, pre-rendering or a Pages Function.
-- **No sitemap:** intentionally deferred because no production domain has been confirmed. A valid `robots.txt` is present without a `Sitemap:` line.
+- **No sitemap:** intentionally deferred while the final custom domain is pending; the Pages URL is live. A valid `robots.txt` is present without a `Sitemap:` line.
 - **Social metadata:** per-route meta tags are applied client-side after hydration. The static HTML contains baseline metadata; social image URLs become absolute at runtime. Fully static per-route previews would require pre-rendering.
 - **Wide tables:** some case-study and artifact data tables scroll horizontally inside focusable regions on narrow screens instead of collapsing every column.
 - **Generated assets:** `dist/` and `node_modules/` are ignored by `.gitignore`. The build can be recreated with `npm ci && npm run build`.
-- **Working tree:** source is committed and pushed to the public GitHub repository. The site itself is not deployed.
+- **Legacy `_redirects` warning:** Cloudflare Pages reports `/* /index.html 200` as an infinite loop and ignores the rule, but its built-in SPA fallback still serves `index.html` for unknown paths. Direct deep links were verified on the live site.
+- **Working tree:** source is committed and pushed to the public GitHub repository, and the site is deployed at https://mahmudqa.pages.dev/.
 
 ---
 
 ## 7. Recommended next steps
 
-1. Review the copy, résumé facts and portrait with Abdullah.
-2. Review the mobile artifact interaction and the three fictional dossiers.
-3. Review the published repository and keep source changes committed there.
-4. Connect the repository to Cloudflare Pages with the settings above and review the preview deployment.
-5. After explicit approval, attach the production domain, update DNS, add the sitemap and run final post-deployment checks.
+1. Review the live site at https://mahmudqa.pages.dev/ and confirm the copy, résumé facts and portrait.
+2. Review the mobile artifact interaction and the three fictional dossiers on a real phone.
+3. Keep source changes committed to `main`; Cloudflare Pages rebuilds and deploys automatically with the current build configuration.
+4. If a custom domain is wanted, attach it and update DNS only with explicit owner approval.
+5. After the final domain is chosen, add a sitemap, add its absolute URL to `robots.txt`, and re-run Lighthouse and social-preview checks.
