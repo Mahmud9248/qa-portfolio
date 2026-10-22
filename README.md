@@ -140,15 +140,15 @@ Manual QA is the subject of the site. No automated-testing expertise is implied 
 
 ## SEO and metadata
 
-- Per-route `<title>`, description, canonical URL, Open Graph and Twitter metadata are set at runtime. The canonical path omits query parameters.
-- Social image URLs are made absolute from the current origin so shared links resolve correctly after deployment.
+- The static HTML includes absolute canonical, Open Graph and Twitter URLs for `https://mahmudqa.pages.dev/`, so link-preview crawlers that do not run JavaScript can resolve the 1200×630 social card.
+- Per-route `<title>`, description, canonical URL, Open Graph and Twitter metadata are also updated at runtime. The canonical path omits query parameters.
 - The home page includes valid `Person` JSON-LD built from the résumé facts.
 - The 404 route sets `robots` to `noindex, nofollow`.
 - `public/robots.txt` is valid and intentionally contains no `Sitemap:` entry until the final custom domain is confirmed.
 - `public/_headers` adds security headers plus long-lived cache headers for `/images/*` and `/assets/*`.
 - `public/_redirects` is retained as a compatibility fallback. The live Pages project also serves `index.html` for unknown paths, which keeps direct deep links working.
 
-After the final domain is known, update the canonical/social base if needed, add a sitemap, and add its absolute URL to `robots.txt`. The current runtime metadata uses `window.location.origin`, so no domain is hard-coded.
+After the final custom domain is known, update the absolute baseline URLs in `index.html`, add a sitemap, and add its absolute URL to `robots.txt`. Runtime metadata uses `window.location.origin` for client-side route changes.
 
 ---
 
@@ -193,6 +193,7 @@ Verified against `https://mahmudqa.pages.dev/` after the successful production d
 - `/documents/resume.pdf` returns `application/pdf`.
 - `/robots.txt` returns `text/plain`.
 - `_headers` is applied at the edge: security headers are present, `/assets/*` and `/images/*` are immutable for one year, and the résumé is served inline for one hour.
+- Link-preview metadata is absolute in the static HTML: `og:image` and `twitter:image` point to `https://mahmudqa.pages.dev/images/og-image.png`; the 1200×630 PNG returns `image/png`.
 - Home, About, Case Studies, Case Study 01 and QA Artifacts were loaded in a browser with no console errors; the 404 was also verified through the fallback.
 
 ### SPA 404 note

@@ -107,6 +107,7 @@ Live checks after deployment:
 - `/documents/resume.pdf` returns `application/pdf`.
 - `/robots.txt` returns `text/plain`.
 - `_headers` is applied at the edge: the security headers are present, `/assets/*` and `/images/*` return `public, max-age=31536000, immutable`, and the résumé returns `public, max-age=3600` with `content-disposition: inline`.
+- Link-preview metadata is absolute in the static HTML: `og:image` and `twitter:image` point to `https://mahmudqa.pages.dev/images/og-image.png`; the 1200×630 PNG returns `image/png`.
 - No console errors were recorded while rendering the home, About, Case Studies, Case Study 01 and QA Artifacts routes.
 - The WalletHub and Codemen mask assets load from `/logos/` and render beside the timeline employer names.
 
@@ -239,7 +240,7 @@ npx wrangler pages deploy dist --project-name mahmudqa
 
 - **SPA 404 status:** unknown paths return HTTP 200 from the static host while rendering the in-app 404 with `noindex`. A true HTTP 404 would require route-aware rewrites, pre-rendering or a Pages Function.
 - **No sitemap:** intentionally deferred while the final custom domain is pending; the Pages URL is live. A valid `robots.txt` is present without a `Sitemap:` line.
-- **Social metadata:** per-route meta tags are applied client-side after hydration. The static HTML contains baseline metadata; social image URLs become absolute at runtime. Fully static per-route previews would require pre-rendering.
+- **Social metadata:** the static home HTML contains absolute canonical, Open Graph and Twitter URLs plus a 1200×630 social card, so preview crawlers that do not execute JavaScript can resolve the thumbnail. Per-route meta tags are applied client-side after hydration, so deep-link shares may still show the home card until pre-rendering is added.
 - **Wide tables:** some case-study and artifact data tables scroll horizontally inside focusable regions on narrow screens instead of collapsing every column.
 - **Generated assets:** `dist/` and `node_modules/` are ignored by `.gitignore`. The build can be recreated with `npm ci && npm run build`.
 - **Legacy `_redirects` warning:** Cloudflare Pages reports `/* /index.html 200` as an infinite loop and ignores the rule, but its built-in SPA fallback still serves `index.html` for unknown paths. Direct deep links were verified on the live site.
