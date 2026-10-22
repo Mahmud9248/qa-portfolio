@@ -1,0 +1,14 @@
+{
+  "source": "profile.jpg",
+  "widths": [
+    480,
+    768,
+    1080,
+    1536
+  ],
+  "formats": [
+    "avif",
+    "webp"
+  ],
+  "social": "og-image.png"
+}
