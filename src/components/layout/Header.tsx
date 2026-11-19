@@ -7,6 +7,19 @@ import { Brand, BrandMark } from './Brand';
 import { EASE_CINEMATIC } from '../../lib/motion';
 import { cx } from '../../lib/cx';
 
+const KERAKODE_URL = 'https://kerakode.mahmudqa.cv/?utm_source=mahmudqa.cv&utm_medium=nav';
+
+// The KeraKode "Terminal K" mark; the cursor block blinks like the studio logo.
+function KeraKodeMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="10" y="10" width="7" height="44" rx="1.5" fill="currentColor" />
+      <polyline points="42,10 22,32 42,54" fill="none" stroke="currentColor" strokeWidth="7" />
+      <rect className="kerakode-mark__caret" x="46" y="46" width="10" height="8" fill="currentColor" />
+    </svg>
+  );
+}
+
 function DesktopNav() {
   return (
     <nav className="desktop-nav" aria-label="Primary navigation">
@@ -33,6 +46,11 @@ function DesktopNav() {
           )}
         </NavLink>
       ))}
+      <a className="desktop-nav__link desktop-nav__kerakode" href={KERAKODE_URL} target="_blank" rel="noopener">
+        <KeraKodeMark className="kerakode-mark" />
+        <span>Kera<span className="kerakode-word__dim">Kode</span></span>
+        <ArrowUpRight size={12} strokeWidth={1.6} aria-hidden="true" />
+      </a>
     </nav>
   );
 }
@@ -102,6 +120,17 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               </NavLink>
             </motion.div>
           ))}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.06 + navigation.length * 0.05, duration: 0.5, ease: EASE_CINEMATIC }}
+          >
+            <a className="mobile-menu__link mobile-menu__kerakode" href={KERAKODE_URL} target="_blank" rel="noopener" onClick={onClose}>
+              <KeraKodeMark className="kerakode-mark mobile-menu__link-index" />
+              <span>Kera<span className="kerakode-word__dim">Kode</span></span>
+              <ArrowUpRight size={20} strokeWidth={1.4} aria-hidden="true" />
+            </a>
+          </motion.div>
         </nav>
 
         <div className="mobile-menu__footer">
