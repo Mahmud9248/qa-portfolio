@@ -122,3 +122,106 @@
 @media (prefers-reduced-motion: reduce) {
   .status-pill__dot::after { animation: none; }
 }
+
+/* ---------- floating header after scroll ---------- */
+.site-header { transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease); }
+.site-header__inner { transition: width 0.55s var(--ease), height 0.55s var(--ease), margin 0.55s var(--ease), background-color 0.4s var(--ease), border-color 0.4s var(--ease), border-radius 0.55s var(--ease), box-shadow 0.55s var(--ease); border: 1px solid transparent; }
+@media (min-width: 761px) {
+  .site-header.is-scrolled {
+    border-color: transparent;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .site-header.is-scrolled .site-header__inner {
+    width: min(calc(100% - 28px), calc(var(--shell) + var(--gutter)));
+    height: 58px;
+    margin-top: 9px;
+    border-color: var(--line);
+    border-radius: 14px;
+    background: rgba(11, 13, 16, 0.82);
+    backdrop-filter: blur(22px) saturate(130%);
+    -webkit-backdrop-filter: blur(22px) saturate(130%);
+    box-shadow: 0 22px 44px -28px rgba(0, 0, 0, 0.95);
+  }
+}
+.desktop-nav__studio-tag {
+  padding: 0.05rem 0.32rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.46rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- ⌘K button + palette ---------- */
+.header-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 30px;
+  padding: 0 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.header-search:hover, .header-search:focus-visible { color: var(--ink); border-color: var(--line-strong); }
+.header-search kbd, .cmdk kbd {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.cmdk {
+  width: min(640px, calc(100vw - 2rem));
+  max-height: min(560px, calc(100dvh - 4rem));
+  margin: 12vh auto auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--bg-panel);
+  color: var(--ink);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+}
+.cmdk::backdrop { background: rgba(4, 5, 6, 0.62); backdrop-filter: blur(4px); }
+.cmdk[open] { animation: cmdk-in 0.28s var(--ease); }
+@keyframes cmdk-in { from { opacity: 0; transform: translateY(10px) scale(0.985); } to { opacity: 1; transform: none; } }
+.cmdk__panel { display: flex; flex-direction: column; max-height: inherit; }
+.cmdk__search { display: flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.1rem; border-bottom: 1px solid var(--line); color: var(--ink-muted); }
+.cmdk__search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 1rem; outline: none; }
+.cmdk__search input::placeholder { color: var(--ink-faint); }
+.cmdk__list { list-style: none; margin: 0; padding: 0.4rem; overflow-y: auto; }
+.cmdk__group { margin: 0.7rem 0.7rem 0.3rem; color: var(--ink-faint); }
+.cmdk__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem 0.75rem;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.cmdk__item svg { color: var(--ink-faint); flex: none; }
+.cmdk__item.is-active { background: var(--bg-panel-3); color: var(--ink); }
+.cmdk__item.is-active svg { color: var(--steel); }
+.cmdk__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmdk__hint { color: var(--ink-faint); font-family: var(--font-mono); font-size: 0.58rem; white-space: nowrap; }
+.cmdk__empty { padding: 1.4rem 1rem; color: var(--ink-muted); font-size: 0.9rem; }
+.cmdk__foot { display: flex; gap: 1rem; padding: 0.6rem 1.1rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.7rem; }
+.cmdk__foot kbd { margin-right: 0.2rem; }
+.cmdk__notice { margin-left: auto; color: var(--success); }
+@media (max-width: 1040px) { .header-search { display: none; } }
+@media (prefers-reduced-motion: reduce) { .cmdk[open] { animation: none; } .site-header__inner { transition: none; } }
