@@ -83,7 +83,7 @@ export function ExecutionLab() {
     <section className="execution-section section" id="execution" aria-labelledby="execution-title">
       <div className="shell">
         <SectionHeading
-          index="002"
+          index="004"
           eyebrow="Execution lab"
           title={
             <>

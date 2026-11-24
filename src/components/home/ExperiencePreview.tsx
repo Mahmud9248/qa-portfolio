@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Award } from 'lucide-react';
+import { recognition } from '../../data/experience';
 import { siteConfig, yearsTesting } from '../../data/site';
 import { SectionHeading } from '../ui/SectionHeading';
 import { CompanyLogo } from '../ui/CompanyLogo';
@@ -15,7 +18,7 @@ export function ExperiencePreview() {
     <section className="experience-preview section" id="experience" aria-labelledby="experience-title">
       <div className="shell">
         <SectionHeading
-          index="007"
+          index="002"
           eyebrow="Experience"
           title={
             <>
@@ -54,6 +57,18 @@ export function ExperiencePreview() {
         </div>
 
         <ExperienceTimeline />
+
+        <Reveal className="award-note">
+          <Award size={18} strokeWidth={1.3} aria-hidden="true" />
+          <p>
+            A platform I helped test, <strong>{recognition.context}</strong>, won {recognition.category} at the{' '}
+            {recognition.award}.
+          </p>
+          <Link to="/about" className="text-link">
+            Recognition & education
+            <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );
