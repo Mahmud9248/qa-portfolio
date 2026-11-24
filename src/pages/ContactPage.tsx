@@ -1,13 +1,14 @@
-import { ArrowUpRight, Download, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Clock, Download, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { siteConfig } from '../data/site';
+import { siteConfig, yearsTesting } from '../data/site';
 import { PageHero } from '../components/ui/PageHero';
 import { CopyButton } from '../components/ui/CopyButton';
 import { LinkedInMark } from '../components/ui/BrandIcons';
 import { usePageMeta } from '../hooks/usePageMeta';
 
 const conversationStarters = [
-  'A manual QA role or product team that needs deliberate release validation.',
+  'A QA role (remote, hybrid or on-site in Dhaka) or a product team that needs deliberate release validation.',
+  'Contract or freelance testing for a release, a feature or a billing flow.',
   'A complex workflow that needs clearer acceptance criteria and test conditions.',
   'An API, data or billing flow where the visible result and the stored truth may disagree.',
   'A QA process, artifact library or test strategy that needs a second perspective.',
@@ -35,7 +36,7 @@ export function ContactPage() {
   usePageMeta({
     title: 'Contact',
     description:
-      'Contact Abdullah Al Mahmud, Manual QA Engineer in Dhaka, Bangladesh, by email or LinkedIn. Résumé available for download.',
+      'Contact Abdullah Al Mahmud, Software Quality Assurance Engineer in Dhaka, Bangladesh — open to QA roles, remote or on-site, full-time or contract. Email, LinkedIn and résumé.',
   });
 
   return (
@@ -53,10 +54,12 @@ export function ContactPage() {
         intro={
           <>
             <p>
-              For QA roles, product teams or a conversation about release quality, write directly. Tell me what the
-              product does, what is changing and where the uncertainty is.
+              Hiring for QA, or testing something risky? Write directly. Tell me what the product does, what is
+              changing and where the uncertainty is.
             </p>
-            <p className="small-note">No contact form, no tracking pixel, no auto-responder theatre.</p>
+            <p className="small-note">
+              {siteConfig.status.label}: {siteConfig.status.detail}. {siteConfig.replyTime}
+            </p>
           </>
         }
         aside={
@@ -90,7 +93,9 @@ export function ContactPage() {
               <MapPin size={16} strokeWidth={1.4} aria-hidden="true" />
               <span>
                 <span className="mono-label">Location</span>
-                <strong>{siteConfig.location}</strong>
+                <strong>
+                  {siteConfig.location} · {siteConfig.timezone}
+                </strong>
               </span>
             </div>
           </div>
@@ -109,7 +114,7 @@ export function ContactPage() {
               </h2>
               <p className="contact-page__lead">
                 The best messages are specific: the product, the role or the quality question. I’ll reply from the same
-                address you write to. No calendaring maze required.
+                address you write to. {siteConfig.replyTime}
               </p>
 
               <div className="contact-email-panel">
@@ -126,6 +131,10 @@ export function ContactPage() {
                     <span className="btn__label">Open email client</span>
                     <span className="btn__icon" aria-hidden="true"><Mail size={16} strokeWidth={1.6} /></span>
                   </a>
+                  <a className="btn btn--secondary" href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer">
+                    <span className="btn__label">Message on LinkedIn</span>
+                    <span className="btn__icon" aria-hidden="true"><LinkedInMark /></span>
+                  </a>
                   <a
                     className="btn btn--secondary"
                     href={siteConfig.resumeUrl}
@@ -140,9 +149,14 @@ export function ContactPage() {
               <div className="contact-page__note">
                 <span className="mono-label">Professional context</span>
                 <p>
-                  Manual QA engineer with 4+ years across SaaS, AI-driven and FinTech products. Currently based in
-                  Dhaka, Bangladesh and experienced in distributed, English-speaking teams.
+                  {siteConfig.role} with {yearsTesting()}+ years across SaaS, AI-powered and FinTech products, most
+                  recently at WalletHub. Experienced in distributed, English-speaking teams. {siteConfig.ndaNote}
                 </p>
+                <ul className="contact-worktypes" aria-label="Work I’m open to">
+                  {siteConfig.status.workTypes.map((type) => (
+                    <li key={type}>{type}</li>
+                  ))}
+                </ul>
                 <Link to="/about" className="text-link">
                   Full experience & approach
                   <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden="true" />
@@ -154,7 +168,7 @@ export function ContactPage() {
               <div className="contact-side-card">
                 <div className="contact-side-card__head">
                   <span className="mono-label">Good reasons to write</span>
-                  <span>01—04</span>
+                  <span>01—{String(conversationStarters.length).padStart(2, '0')}</span>
                 </div>
                 <ul>
                   {conversationStarters.map((item, index) => (
@@ -189,15 +203,12 @@ export function ContactPage() {
                   <span className="mono-label">Location</span>
                   <span>{siteConfig.location}</span>
                 </div>
-                {siteConfig.phone.display ? (
-                  <div>
-                    <span className="mono-label">Phone</span>
-                    <a href={`tel:${siteConfig.phone.value.replace(/\s/g, '')}`}>
-                      <Phone size={13} strokeWidth={1.5} aria-hidden="true" />
-                      {siteConfig.phone.value}
-                    </a>
-                  </div>
-                ) : null}
+                <div>
+                  <span className="mono-label">Time zone</span>
+                  <span>
+                    <Clock size={13} strokeWidth={1.5} aria-hidden="true" /> {siteConfig.timezone}
+                  </span>
+                </div>
                 <div>
                   <span className="mono-label">Working language</span>
                   <span>English / Bengali</span>

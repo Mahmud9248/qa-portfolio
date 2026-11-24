@@ -29,7 +29,7 @@ function setLink(rel: string, href: string): void {
 
 export function usePageMeta({ title, description, socialDescription = description, noIndex = false }: PageMeta): void {
   useEffect(() => {
-    const fullTitle = title === 'Home' ? 'Abdullah Al Mahmud — Manual QA Engineer' : `${title} — Abdullah Al Mahmud`;
+    const fullTitle = title === 'Home' ? 'Abdullah Al Mahmud — Software Quality Assurance Engineer' : `${title} — Abdullah Al Mahmud`;
     const absoluteUrl = `${window.location.origin}${window.location.pathname}`;
     const socialImage = `${window.location.origin}/images/og-image.png`;
     document.title = fullTitle;

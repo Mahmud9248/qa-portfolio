@@ -14,8 +14,8 @@ import { siteConfig } from '../data/site';
 export function HomePage() {
   usePageMeta({
     title: 'Home',
-    description: `${siteConfig.heroSupport} Explore original QA case studies and a fictional artifact library.`,
-    socialDescription: 'Manual QA across SaaS, AI-driven and FinTech products.',
+    description: `${siteConfig.heroSupport} ${siteConfig.status.open ? `${siteConfig.status.label}.` : ''}`,
+    socialDescription: 'Software QA across SaaS, AI-powered and FinTech products — open to QA roles.',
   });
 
   return (

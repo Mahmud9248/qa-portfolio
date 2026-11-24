@@ -9,7 +9,7 @@ import {
   Users,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { siteConfig } from '../data/site';
+import { siteConfig, yearsTesting } from '../data/site';
 import { education, engagements, interests, languages, recognition, skills } from '../data/experience';
 import { tools } from '../data/tools';
 import { PageHero } from '../components/ui/PageHero';
@@ -47,7 +47,7 @@ export function AboutPage() {
   usePageMeta({
     title: 'About & Experience',
     description:
-      'About Abdullah Al Mahmud, a Manual QA Engineer in Dhaka with 4+ years of experience across SaaS, AI-driven and FinTech products, including WalletHub and Codemen Solutions.',
+      `About Abdullah Al Mahmud, a Software Quality Assurance Engineer in Dhaka testing SaaS, AI-powered and FinTech products since ${siteConfig.testingSince}, including WalletHub and Codemen Solutions.`,
   });
 
   return (
@@ -65,9 +65,9 @@ export function AboutPage() {
         intro={
           <>
             <p>
-              I’m Abdullah Al Mahmud, a Manual QA Engineer based in Dhaka. For more than four years I’ve tested SaaS,
-              AI-driven and FinTech products, with a focus on complex workflows, financial accuracy and release
-              evidence.
+              I’m Abdullah Al Mahmud, a Software Quality Assurance Engineer based in Dhaka. Since {siteConfig.testingSince}{' '}
+              I’ve tested SaaS, AI-powered and FinTech products, with a focus on complex workflows, financial accuracy
+              and release evidence.
             </p>
             <p>
               My work sits between the requirement and the release: asking what the product promised, finding the paths
@@ -87,7 +87,7 @@ export function AboutPage() {
                 <source type="image/webp" srcSet="/images/profile-768.webp 768w" sizes="(max-width: 900px) 90vw, 34vw" />
                 <img
                   src="/images/profile.jpg"
-                  alt="Portrait of Abdullah Al Mahmud, Manual QA Engineer."
+                  alt="Portrait of Abdullah Al Mahmud, Software Quality Assurance Engineer."
                   width={768}
                   height={1024}
                   loading="lazy"
@@ -97,9 +97,9 @@ export function AboutPage() {
               <div className="about-portrait__footer">
                 <div>
                   <strong>Abdullah Al Mahmud</strong>
-                  <span>Manual QA Engineer</span>
+                  <span>{siteConfig.role}</span>
                 </div>
-                <span className="mono-label">04+ years</span>
+                <span className="mono-label">{yearsTesting()}+ years</span>
               </div>
             </div>
             <figcaption>
@@ -138,8 +138,8 @@ export function AboutPage() {
             <aside className="about-profile__facts" aria-label="Professional facts">
               <div>
                 <span className="mono-label">Experience</span>
-                <strong>4+</strong>
-                <span>years in software quality</span>
+                <strong>{yearsTesting()}+</strong>
+                <span>years in software quality, since {siteConfig.testingSince}</span>
               </div>
               <div>
                 <span className="mono-label">Domains</span>
@@ -255,8 +255,7 @@ export function AboutPage() {
               <h2 id="about-experience-title" className="display">The roles, in sequence.</h2>
             </div>
             <p>
-              Exact employment history from the supplied résumé. Responsibilities are shown as written there, grouped
-              by the environments in which they were performed.
+              Two employers and four titles, newest first. The full résumé is available as a PDF.
             </p>
           </header>
           <ExperienceTimeline detailed />
@@ -272,11 +271,12 @@ export function AboutPage() {
                 <Award size={21} strokeWidth={1.3} aria-hidden="true" />
               </div>
               <div className="recognition-card__year" aria-hidden="true">2023</div>
-              <h2 id="about-recognition-title">{recognition.award}</h2>
-              <p className="recognition-card__category">{recognition.category}</p>
+              <h2 id="about-recognition-title">A platform I helped test won {recognition.category}.</h2>
+              <p className="recognition-card__category">{recognition.context} · {recognition.award}</p>
               <p>
-                Contributed to QA of the <strong>{recognition.context}</strong>, the platform recognised as the winner
-                of the {recognition.award} in the {recognition.category} category.
+                I contributed to quality assurance of the <strong>{recognition.context}</strong> at Codemen Solutions.
+                The platform was recognized as the winner of the {recognition.award} in the {recognition.category}{' '}
+                category.
               </p>
               <div className="recognition-card__attribution">
                 <span className="mono-label">Attribution</span>
@@ -306,7 +306,7 @@ export function AboutPage() {
                 <ul className="foundation-card__interests">
                   {interests.map((interest) => <li key={interest}>{interest}</li>)}
                 </ul>
-                <p className="small-note">Listed as interests from the résumé, not as claimed production experience.</p>
+                <p className="small-note">Areas I’m learning, not claimed production experience.</p>
               </article>
 
               <article className="foundation-card foundation-card--languages">
