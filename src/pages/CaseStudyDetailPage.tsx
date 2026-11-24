@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { motion, useReducedMotion, useScroll, useSpring } from 'motion/react';
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -41,6 +42,50 @@ const CASE_SECTION_IDS = [
   'conclusion',
   'related',
 ];
+
+/** Plain-English line under each poetic dossier title, so a skimming reader knows the subject at once. */
+const plainSubtitle: Record<string, string> = {
+  'financial-validation': 'Testing tier, fee and early-closure rules on a fictional savings-account statement engine.',
+  'saas-regression-testing': 'Regression-testing a workspace seats-and-roles change on a fictional SaaS product.',
+  'api-data-validation': 'Validating a subscription plan-change API through request, response and database layers.',
+};
+
+const SEVERITY_ORDER = ['Critical', 'High', 'Medium', 'Low'];
+
+function ResultInBrief({ study }: { study: CaseStudy }) {
+  const count = (status: string) => study.testCases.filter((t) => t.status === status).length;
+  const worst = SEVERITY_ORDER.find((sev) => study.defects.some((d) => d.severity === sev));
+  const decision = study.regression.releaseDecision.replace(/^In this fictional release scenario,\s*/i, '');
+  return (
+    <section className="result-brief" aria-labelledby="result-brief-title">
+      <div className="shell result-brief__inner">
+        <div className="result-brief__head">
+          <span className="mono-label">Result in brief</span>
+          <h2 id="result-brief-title">What the evidence said.</h2>
+        </div>
+        <dl className="result-brief__stats">
+          <div><dt>Test cases</dt><dd>{study.testCases.length}</dd></div>
+          <div><dt>Passed</dt><dd className="is-pass">{count('Passed')}</dd></div>
+          <div><dt>Failed</dt><dd className="is-fail">{count('Failed')}</dd></div>
+          <div><dt>Blocked</dt><dd>{count('Blocked')}</dd></div>
+          <div><dt>Defects</dt><dd>{study.defects.length}{worst ? <small> · worst {worst}</small> : null}</dd></div>
+        </dl>
+        <p className="result-brief__decision">
+          <span className="mono-label">Release position</span>
+          {decision.charAt(0).toUpperCase() + decision.slice(1)}
+        </p>
+        <a href="#conclusion" className="text-link result-brief__jump">Skip to the conclusion</a>
+      </div>
+    </section>
+  );
+}
+
+function ReadingProgress() {
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.3 });
+  return <motion.div className="reading-progress" style={{ scaleX: reduce ? scrollYProgress : scaleX }} aria-hidden="true" />;
+}
 
 const sectionLabels: { id: string; label: string }[] = [
   { id: 'overview', label: 'Overview' },
@@ -123,12 +168,14 @@ export function CaseStudyDetailPage() {
 
   return (
     <>
+      <ReadingProgress />
       <PageHero
         index={`Case ${study.number}`}
         eyebrow={`${study.domain} / Demo dossier`}
         title={study.title}
         intro={
           <>
+            <p className="dossier-plain">{plainSubtitle[study.slug]}</p>
             <p>{study.intro}</p>
             <ul className="tag-list dossier-tags" aria-label="Case study techniques">
               {study.tags.map((tag) => <li key={tag}>{tag}</li>)}
@@ -167,6 +214,8 @@ export function CaseStudyDetailPage() {
           </p>
         </div>
       </div>
+
+      <ResultInBrief study={study} />
 
       <div className="dossier-shell shell">
         <aside className="dossier-toc" aria-label="On this page">
