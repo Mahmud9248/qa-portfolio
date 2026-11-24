@@ -21,7 +21,7 @@ export function ArtifactPreview() {
     <section className="artifacts-preview section" id="artifacts" aria-labelledby="artifacts-title">
       <div className="shell">
         <SectionHeading
-          index="005"
+          index="006"
           eyebrow="QA artifact archive"
           title={
             <>

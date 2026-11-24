@@ -1,3 +1,4 @@
+import { siteConfig } from '../../data/site';
 import { Link } from 'react-router-dom';
 import { cx } from '../../lib/cx';
 
@@ -24,13 +25,13 @@ export function Brand({ onClick }: { onClick?: () => void }) {
     <Link
       to="/"
       className="brand"
-      aria-label="Abdullah Al Mahmud, Manual QA Engineer — home"
+      aria-label={`Abdullah Al Mahmud, ${siteConfig.role} — home`}
       onClick={onClick}
     >
       <BrandMark className="brand__mark" />
       <span className="brand__text">
         <span className="brand__name">Abdullah Al Mahmud</span>
-        <span className="brand__role">Manual QA Engineer</span>
+        <span className="brand__role">{siteConfig.role}</span>
       </span>
     </Link>
   );

@@ -1,8 +1,25 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { Plus } from 'lucide-react';
-import { siteConfig } from '../../data/site';
+import { siteConfig, yearsTesting } from '../../data/site';
 import { LineReveal, Reveal } from '../ui/Reveal';
 import { EASE_CINEMATIC } from '../../lib/motion';
+
+const whatIDo = [
+  'Functional, regression, smoke and exploratory testing on web and mobile',
+  'REST API validation in Postman — auth, responses and data integrity',
+  'Financial workflows, calculations and Stripe billing scenarios',
+  'Release validation, including Blue-Green deployments',
+  'Performance checks with JMeter',
+  'Clear defect reports and triage in Jira',
+];
+
+const howIWork = [
+  'Clarify the requirement before testing the screen.',
+  'Test the riskiest paths first, then widen coverage.',
+  'Report defects with steps, data, expected vs. actual.',
+  'Say plainly what is blocked or untested before a release.',
+  'Work async with distributed, English-speaking teams.',
+];
 
 const principles = [
   {
@@ -55,12 +72,12 @@ export function Manifesto() {
               <span className="mono-label">Practice profile</span>
               <span className="manifesto__verified">
                 <span className="signal-dot" aria-hidden="true" />
-                Manual quality
+                Software quality
               </span>
             </div>
             <div className="manifesto__stat">
-              <span className="manifesto__stat-value">4+</span>
-              <span className="manifesto__stat-label">years in software quality</span>
+              <span className="manifesto__stat-value">{yearsTesting()}+</span>
+              <span className="manifesto__stat-label">years in software quality, since {siteConfig.testingSince}</span>
             </div>
             <div className="manifesto__stat-rule" aria-hidden="true" />
             <dl className="manifesto__mini-list">
@@ -103,6 +120,31 @@ export function Manifesto() {
               </Reveal>
             ))}
           </div>
+        </div>
+
+        <div className="practice-split">
+          <Reveal className="practice-split__col">
+            <p className="mono-label">What I do</p>
+            <ul>
+              {whatIDo.map((item) => (
+                <li key={item}>
+                  <span className="practice-split__tick" aria-hidden="true">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal className="practice-split__col" delay={0.08}>
+            <p className="mono-label">How I work</p>
+            <ol>
+              {howIWork.map((item, index) => (
+                <li key={item}>
+                  <span className="practice-split__num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  {item}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { Menu, X, ArrowUpRight, Download, Mail } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Download, Mail, Search } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { navigation, siteConfig } from '../../data/site';
 import { Brand, BrandMark } from './Brand';
@@ -8,6 +8,7 @@ import { EASE_CINEMATIC } from '../../lib/motion';
 import { cx } from '../../lib/cx';
 
 const KERAKODE_URL = 'https://kerakode.mahmudqa.cv/?utm_source=mahmudqa.cv&utm_medium=nav';
+const CommandPalette = lazy(() => import('./CommandPalette'));
 
 // The KeraKode "Terminal K" mark; the cursor block blinks like the studio logo.
 function KeraKodeMark({ className }: { className?: string }) {
@@ -49,7 +50,9 @@ function DesktopNav() {
       <a className="desktop-nav__link desktop-nav__kerakode" href={KERAKODE_URL} target="_blank" rel="noopener">
         <KeraKodeMark className="kerakode-mark" />
         <span>Kera<span className="kerakode-word__dim">Kode</span></span>
+        <span className="desktop-nav__studio-tag">studio</span>
         <ArrowUpRight size={12} strokeWidth={1.6} aria-hidden="true" />
+        <span className="sr-only"> (design and build studio, opens in a new tab)</span>
       </a>
     </nav>
   );
@@ -159,6 +162,19 @@ export function Header() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuWasOpen = useRef(false);
   const reduce = useReducedMotion();
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const closePalette = useCallback(() => setPaletteOpen(false), []);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        setPaletteOpen((open) => !open);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 20);
@@ -189,6 +205,15 @@ export function Header() {
           <Brand />
           <DesktopNav />
           <div className="site-header__actions">
+            <button
+              type="button"
+              className="header-search"
+              onClick={() => setPaletteOpen(true)}
+              aria-label="Quick jump to a page, case study or artifact (Ctrl or Command + K)"
+            >
+              <Search size={13} strokeWidth={1.6} aria-hidden="true" />
+              <kbd>⌘K</kbd>
+            </button>
             <span className="header-location">
               <span className="header-location__signal" aria-hidden="true" />
               Dhaka, BD
@@ -212,6 +237,11 @@ export function Header() {
           </div>
         </div>
       </motion.header>
+      {paletteOpen ? (
+        <Suspense fallback={null}>
+          <CommandPalette onClose={closePalette} />
+        </Suspense>
+      ) : null}
       <div id="mobile-navigation">
         <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
       </div>

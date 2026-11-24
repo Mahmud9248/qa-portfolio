@@ -2,7 +2,7 @@
 
 **Date:** 22 October 2026  
 **Status:** Implementation complete, locally verified, published as a public GitHub repository, and deployed to Cloudflare Pages.  
-**Live site:** https://mahmudqa.pages.dev/  
+**Live site:** https://mahmudqa.cv/ (Cloudflare Pages project `mahmudqa`, also at https://mahmudqa.pages.dev/)  
 **Repository:** https://github.com/Mahmud9248/qa-portfolio  
 **Project folder:** `qa-portfolio/` (repository root)  
 **Production output:** `dist/`

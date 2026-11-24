@@ -1,12 +1,16 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Award } from 'lucide-react';
+import { recognition } from '../../data/experience';
+import { siteConfig, yearsTesting } from '../../data/site';
 import { SectionHeading } from '../ui/SectionHeading';
 import { CompanyLogo } from '../ui/CompanyLogo';
 import { ExperienceTimeline } from '../about/ExperienceTimeline';
 import { Reveal } from '../ui/Reveal';
 
 const facts = [
-  { value: '4+', label: 'years in software quality' },
+  { value: `${yearsTesting()}+`, label: `years in software quality, since ${siteConfig.testingSince}` },
   { value: '02', label: 'companies' },
-  { value: '04', label: 'QA roles held' },
+  { value: '04', label: 'QA titles, intern to engineer' },
 ];
 
 export function ExperiencePreview() {
@@ -14,7 +18,7 @@ export function ExperiencePreview() {
     <section className="experience-preview section" id="experience" aria-labelledby="experience-title">
       <div className="shell">
         <SectionHeading
-          index="007"
+          index="002"
           eyebrow="Experience"
           title={
             <>
@@ -26,7 +30,7 @@ export function ExperiencePreview() {
           id="experience-title"
           copy={
             <p>
-              From an SQA internship to release-focused manual QA for a U.S. fintech product. The thread is consistent:
+              From an SQA internship to release-focused QA for a U.S. fintech product. The thread is consistent:
               understand the workflow, test the edges and make the evidence useful to the team.
             </p>
           }
@@ -53,6 +57,18 @@ export function ExperiencePreview() {
         </div>
 
         <ExperienceTimeline />
+
+        <Reveal className="award-note">
+          <Award size={18} strokeWidth={1.3} aria-hidden="true" />
+          <p>
+            A platform I helped test, <strong>{recognition.context}</strong>, won {recognition.category} at the{' '}
+            {recognition.award}.
+          </p>
+          <Link to="/about" className="text-link">
+            Recognition & education
+            <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

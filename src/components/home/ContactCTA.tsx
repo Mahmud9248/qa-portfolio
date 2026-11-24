@@ -15,7 +15,7 @@ export function ContactCTA() {
           <Reveal>
             <p className="eyebrow">
               <span className="eyebrow__mark" aria-hidden="true" />
-              009 / Open channel
+              008 / Open channel
             </p>
           </Reveal>
           <Reveal delay={0.06}>
@@ -34,8 +34,8 @@ export function ContactCTA() {
             </LineReveal>
             <Reveal delay={0.1}>
               <p className="contact-cta__copy">
-                If you need a manual QA engineer who reads the requirement, follows the data and leaves behind evidence
-                the whole team can use, start a conversation.
+                Hiring a QA engineer who reads the requirement, follows the data and leaves behind evidence the whole
+                team can use? I’m open to QA roles — remote, hybrid or on-site in Dhaka, full-time or contract.
               </p>
               <div className="contact-cta__actions">
                 <ActionLink href={`mailto:${siteConfig.email}`} showArrow>

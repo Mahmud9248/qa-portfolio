@@ -68,7 +68,18 @@ export function Footer() {
         </div>
 
         <div className="site-footer__bottom">
-          <p>© {year} Abdullah Al Mahmud. Manual QA Engineer · {siteConfig.location}.</p>
+          <p>
+            © {year} Abdullah Al Mahmud. {siteConfig.role} · {siteConfig.location}.
+            {siteConfig.status.open ? <span className="site-footer__status"> {siteConfig.status.label}.</span> : null}
+          </p>
+          <p className="site-footer__studio">
+            Also building at{' '}
+            <a href={siteConfig.studio.url} target="_blank" rel="noopener">
+              {siteConfig.studio.name}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>{' '}
+            — {siteConfig.studio.line}
+          </p>
           <p className="site-footer__demo">Portfolio demonstrations use fictional systems and data.</p>
           <button type="button" className="back-to-top" onClick={backToTop}>
             Back to top

@@ -3,7 +3,7 @@
 A dark, editorial portfolio for a manual software quality assurance engineer. The site pairs a detailed professional record with three interactive QA case dossiers and a searchable library of sample artifacts.
 
 Source: https://github.com/Mahmud9248/qa-portfolio  
-Live: https://mahmudqa.pages.dev/
+Live: https://mahmudqa.cv/ (also served at https://mahmudqa.pages.dev/)
 
 Built with React, TypeScript, Vite, React Router and Motion. All fonts and images are self-hosted. The build is a static bundle intended for Cloudflare Pages.
 
@@ -140,7 +140,7 @@ Manual QA is the subject of the site. No automated-testing expertise is implied 
 
 ## SEO and metadata
 
-- The static HTML includes absolute canonical, Open Graph and Twitter URLs for `https://mahmudqa.pages.dev/`, so link-preview crawlers that do not run JavaScript can resolve the 1200×630 social card.
+- The static HTML includes absolute canonical, Open Graph and Twitter URLs for `https://mahmudqa.cv/`, so link-preview crawlers that do not run JavaScript can resolve the 1200×630 social card.
 - Per-route `<title>`, description, canonical URL, Open Graph and Twitter metadata are also updated at runtime. The canonical path omits query parameters.
 - The home page includes valid `Person` JSON-LD built from the résumé facts.
 - The 404 route sets `robots` to `noindex, nofollow`.
@@ -154,7 +154,7 @@ After the final custom domain is known, update the absolute baseline URLs in `in
 
 ## Cloudflare Pages
 
-The site is live at **https://mahmudqa.pages.dev/**. It deploys from the `main` branch of the GitHub repository through Cloudflare Pages.
+The site is live at **https://mahmudqa.cv/** (Cloudflare Pages project `mahmudqa`). It deploys from the `main` branch of the GitHub repository through Cloudflare Pages.
 
 | Setting | Value |
 | --- | --- |

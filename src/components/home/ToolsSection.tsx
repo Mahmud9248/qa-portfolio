@@ -7,7 +7,7 @@ import { Reveal, StaggerGroup, StaggerItem } from '../ui/Reveal';
 const groupIndex: Record<string, string> = {
   'Test management': 'A',
   'API & performance': 'B',
-  'Data & observability': 'C',
+  'Data, devices & monitoring': 'C',
 };
 
 export function ToolsSection() {
@@ -15,7 +15,7 @@ export function ToolsSection() {
     <section className="tools-section section" id="toolkit" aria-labelledby="toolkit-title">
       <div className="shell">
         <SectionHeading
-          index="006"
+          index="007"
           eyebrow="Core toolkit"
           title={
             <>
@@ -28,8 +28,8 @@ export function ToolsSection() {
           copy={
             <>
               <p>
-                Every tool below is part of the manual QA practice described in the résumé: test management, API and
-                performance validation, data checks and error monitoring.
+                Tools from my day-to-day QA work: test management, API and payment checks, performance runs, data
+                queries, device coverage and error monitoring.
               </p>
               <p className="small-note">Marks are shown in a unified monochrome treatment.</p>
             </>
