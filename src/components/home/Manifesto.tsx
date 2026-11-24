@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { Plus } from 'lucide-react';
-import { siteConfig } from '../../data/site';
+import { siteConfig, yearsTesting } from '../../data/site';
 import { LineReveal, Reveal } from '../ui/Reveal';
 import { EASE_CINEMATIC } from '../../lib/motion';
 
@@ -55,12 +55,12 @@ export function Manifesto() {
               <span className="mono-label">Practice profile</span>
               <span className="manifesto__verified">
                 <span className="signal-dot" aria-hidden="true" />
-                Manual quality
+                Software quality
               </span>
             </div>
             <div className="manifesto__stat">
-              <span className="manifesto__stat-value">4+</span>
-              <span className="manifesto__stat-label">years in software quality</span>
+              <span className="manifesto__stat-value">{yearsTesting()}+</span>
+              <span className="manifesto__stat-label">years in software quality, since {siteConfig.testingSince}</span>
             </div>
             <div className="manifesto__stat-rule" aria-hidden="true" />
             <dl className="manifesto__mini-list">

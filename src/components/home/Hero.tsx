@@ -2,7 +2,7 @@ import type { PointerEvent } from 'react';
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 import { ArrowDown, ArrowUpRight, Download } from 'lucide-react';
 import { ActionLink } from '../ui/Action';
-import { siteConfig } from '../../data/site';
+import { siteConfig, yearsTesting } from '../../data/site';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { EASE_CINEMATIC } from '../../lib/motion';
 
@@ -44,9 +44,24 @@ export function Hero() {
           >
             <p className="eyebrow">
               <span className="eyebrow__mark" aria-hidden="true" />
-              Manual QA / 4+ years
+              {siteConfig.roleShort} / since {siteConfig.testingSince}
             </p>
             <span className="hero__eyebrow-role">SaaS · FinTech · AI</span>
+          </motion.div>
+
+          <motion.div
+            className="hero__status"
+            initial={reduce ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE_CINEMATIC, delay: 0.2 }}
+          >
+            {siteConfig.status.open ? (
+              <a className="status-pill" href={`mailto:${siteConfig.email}?subject=QA%20role`}>
+                <span className="status-pill__dot" aria-hidden="true" />
+                <span className="status-pill__label">{siteConfig.status.label}</span>
+                <span className="status-pill__detail">{siteConfig.status.detail}</span>
+              </a>
+            ) : null}
           </motion.div>
 
           <h1 className="hero__title display" id="hero-title">
@@ -60,7 +75,17 @@ export function Hero() {
                 >
                   {index === 1 ? (
                     <>
-                      an <em>assumption.</em>
+                      an{' '}
+                      <em className="hero__struck">
+                        assumption.
+                        <motion.span
+                          className="hero__strike"
+                          aria-hidden="true"
+                          initial={reduce ? false : { scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: 0.7, ease: EASE_CINEMATIC, delay: 1.25 }}
+                        />
+                      </em>
                     </>
                   ) : (
                     line
@@ -91,7 +116,7 @@ export function Hero() {
               </ActionLink>
             </div>
             <a className="hero__contact-link" href={`mailto:${siteConfig.email}`}>
-              <span>Have a release that needs another set of eyes?</span>
+              <span>Hiring for QA, or have a release that needs another set of eyes?</span>
               <span className="hero__contact-action">
                 Start a conversation
                 <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
@@ -106,16 +131,18 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.9 }}
           >
             <div>
+              <dt>Most recently</dt>
+              <dd>WalletHub</dd>
+            </div>
+            <div>
+              <dt>Before that</dt>
+              <dd>Codemen Solutions</dd>
+            </div>
+            <div>
               <dt>Based in</dt>
-              <dd>Dhaka, BD</dd>
-            </div>
-            <div>
-              <dt>Focus</dt>
-              <dd>Manual QA</dd>
-            </div>
-            <div>
-              <dt>Evidence</dt>
-              <dd>Tested, not assumed</dd>
+              <dd>
+                {siteConfig.locationShort} <span className="hero__facts-muted">{siteConfig.timezone}</span>
+              </dd>
             </div>
           </motion.dl>
         </div>
@@ -141,10 +168,10 @@ export function Hero() {
             <div className="portrait-frame__topbar">
               <span>
                 <i className="signal-dot" aria-hidden="true" />
-                SUBJECT / PORTRAIT
+                SQA ENGINEER
               </span>
-              <span>MANUAL QA</span>
-              <span>01—04</span>
+              <span>{yearsTesting()}+ YRS</span>
+              <span>WEB · MOBILE · API</span>
             </div>
 
             <div className="portrait-media">
@@ -165,7 +192,7 @@ export function Hero() {
                   />
                   <img
                     src="/images/profile.jpg"
-                    alt="Portrait of Abdullah Al Mahmud, a Manual QA Engineer, wearing a dark button-up shirt."
+                    alt="Portrait of Abdullah Al Mahmud, a Software Quality Assurance Engineer, wearing a dark button-up shirt."
                     width={1536}
                     height={2048}
                     fetchPriority="high"
@@ -177,9 +204,9 @@ export function Hero() {
               <div className="portrait-media__scan" aria-hidden="true" />
               <div className="portrait-media__corner portrait-media__corner--tl" aria-hidden="true" />
               <div className="portrait-media__corner portrait-media__corner--br" aria-hidden="true" />
-              <div className="portrait-media__stamp">
-                <span>PERSON /</span>
-                <strong>A.A.M.</strong>
+              <div className="portrait-media__stamp" aria-hidden="true">
+                <span>STATUS /</span>
+                <strong>{siteConfig.status.open ? 'OPEN' : 'A.A.M.'}</strong>
               </div>
             </div>
 
@@ -190,9 +217,9 @@ export function Hero() {
               </div>
               <div className="portrait-frame__status">
                 <span className="signal-dot" aria-hidden="true" />
-                <span>Evidence-driven</span>
+                <span>{siteConfig.status.open ? siteConfig.status.label : 'Evidence-driven'}</span>
               </div>
-              <span className="portrait-frame__code">23.81°N / 90.41°E</span>
+              <span className="portrait-frame__code">{siteConfig.timezone}</span>
             </div>
 
             <motion.span
@@ -206,6 +233,7 @@ export function Hero() {
 
           <motion.div
             className="hero__annotation hero__annotation--top"
+            aria-hidden="true"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.05, ease: EASE_CINEMATIC }}
@@ -215,6 +243,7 @@ export function Hero() {
           </motion.div>
           <motion.div
             className="hero__annotation hero__annotation--bottom"
+            aria-hidden="true"
             initial={reduce ? false : { opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 1.15, ease: EASE_CINEMATIC }}

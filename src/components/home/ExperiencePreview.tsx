@@ -1,12 +1,13 @@
+import { siteConfig, yearsTesting } from '../../data/site';
 import { SectionHeading } from '../ui/SectionHeading';
 import { CompanyLogo } from '../ui/CompanyLogo';
 import { ExperienceTimeline } from '../about/ExperienceTimeline';
 import { Reveal } from '../ui/Reveal';
 
 const facts = [
-  { value: '4+', label: 'years in software quality' },
+  { value: `${yearsTesting()}+`, label: `years in software quality, since ${siteConfig.testingSince}` },
   { value: '02', label: 'companies' },
-  { value: '04', label: 'QA roles held' },
+  { value: '04', label: 'QA titles, intern to engineer' },
 ];
 
 export function ExperiencePreview() {
@@ -26,7 +27,7 @@ export function ExperiencePreview() {
           id="experience-title"
           copy={
             <p>
-              From an SQA internship to release-focused manual QA for a U.S. fintech product. The thread is consistent:
+              From an SQA internship to release-focused QA for a U.S. fintech product. The thread is consistent:
               understand the workflow, test the edges and make the evidence useful to the team.
             </p>
           }
