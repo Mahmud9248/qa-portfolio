@@ -268,3 +268,7 @@
 @media (max-width: 560px) {
   .result-brief__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* ---------- 404 additions ---------- */
+.not-found__sublabel { display: block; margin-top: 1.6rem; }
+.not-found__report { margin-top: 1.2rem; color: var(--ink-muted); font-size: 0.9rem; }

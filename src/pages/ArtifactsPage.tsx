@@ -1,3 +1,4 @@
+import { siteConfig } from '../data/site';
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, Search, SlidersHorizontal, X } from 'lucide-react';
@@ -94,7 +95,10 @@ export function ArtifactsPage() {
               Ten original sample artifacts from the QA lifecycle: plans, decision tables, test cases, defect reports,
               API evidence and SQL reconciliation. Open a file, read the reasoning and download a Markdown copy.
             </p>
-            <p className="small-note">Every system, record and result in this library is fictional.</p>
+            <p className="small-note">
+              Every system, record and result in this library is fictional — employer work stays under NDA.{' '}
+              {siteConfig.ndaNote}
+            </p>
           </>
         }
         aside={

@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowUpRight, Compass, FileQuestion } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { navigation } from '../data/site';
+import { navigation, siteConfig } from '../data/site';
+import { caseStudies } from '../data/caseStudies';
 import { PageHero } from '../components/ui/PageHero';
 import { usePageMeta } from '../hooks/usePageMeta';
 
@@ -67,6 +68,16 @@ export function NotFoundPage() {
                   </Link>
                 ))}
               </nav>
+              <span className="mono-label not-found__sublabel">Case studies</span>
+              <nav aria-label="Case studies">
+                {caseStudies.map((study) => (
+                  <Link to={`/case-studies/${study.slug}`} key={study.slug}>
+                    <span>{study.number}</span>
+                    {study.shortTitle}
+                    <ArrowUpRight size={15} strokeWidth={1.5} aria-hidden="true" />
+                  </Link>
+                ))}
+              </nav>
             </div>
             <div className="not-found__secondary">
               <Compass size={20} strokeWidth={1.3} aria-hidden="true" />
@@ -78,6 +89,16 @@ export function NotFoundPage() {
                 Open artifact library
                 <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden="true" />
               </Link>
+              <p className="not-found__report">
+                Followed a link here that should work?{' '}
+                <a
+                  className="text-link"
+                  href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`Broken link: ${location.pathname}`)}`}
+                >
+                  Tell me about it
+                </a>
+                .
+              </p>
             </div>
           </div>
           <Link to="/" className="not-found__home">

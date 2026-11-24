@@ -132,6 +132,14 @@ export function AboutPage() {
                   Across both environments, the same principle held: understand the workflow deeply enough to know where
                   it can fail, then produce evidence that makes the failure impossible to dismiss.
                 </p>
+                <p>
+                  Outside QA work I run{' '}
+                  <a className="text-link" href={siteConfig.studio.url} target="_blank" rel="noopener">
+                    {siteConfig.studio.name}
+                  </a>
+                  , my design &amp; build studio. Building products myself keeps my testing grounded in how software is
+                  actually made.
+                </p>
               </div>
             </div>
 
