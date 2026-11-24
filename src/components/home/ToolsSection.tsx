@@ -15,7 +15,7 @@ export function ToolsSection() {
     <section className="tools-section section" id="toolkit" aria-labelledby="toolkit-title">
       <div className="shell">
         <SectionHeading
-          index="006"
+          index="007"
           eyebrow="Core toolkit"
           title={
             <>

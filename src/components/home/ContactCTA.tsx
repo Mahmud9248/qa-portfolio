@@ -15,7 +15,7 @@ export function ContactCTA() {
           <Reveal>
             <p className="eyebrow">
               <span className="eyebrow__mark" aria-hidden="true" />
-              009 / Open channel
+              008 / Open channel
             </p>
           </Reveal>
           <Reveal delay={0.06}>

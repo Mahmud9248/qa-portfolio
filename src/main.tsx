@@ -5,6 +5,7 @@ import '@fontsource/instrument-serif/400.css';
 import '@fontsource/instrument-serif/400-italic.css';
 import '@fontsource-variable/jetbrains-mono';
 import './styles/global.css';
+import './styles/ui-2026.css';
 import App from './App';
 
 const root = document.getElementById('root');

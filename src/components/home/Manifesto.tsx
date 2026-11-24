@@ -4,6 +4,23 @@ import { siteConfig, yearsTesting } from '../../data/site';
 import { LineReveal, Reveal } from '../ui/Reveal';
 import { EASE_CINEMATIC } from '../../lib/motion';
 
+const whatIDo = [
+  'Functional, regression, smoke and exploratory testing on web and mobile',
+  'REST API validation in Postman — auth, responses and data integrity',
+  'Financial workflows, calculations and Stripe billing scenarios',
+  'Release validation, including Blue-Green deployments',
+  'Performance checks with JMeter',
+  'Clear defect reports and triage in Jira',
+];
+
+const howIWork = [
+  'Clarify the requirement before testing the screen.',
+  'Test the riskiest paths first, then widen coverage.',
+  'Report defects with steps, data, expected vs. actual.',
+  'Say plainly what is blocked or untested before a release.',
+  'Work async with distributed, English-speaking teams.',
+];
+
 const principles = [
   {
     index: '01',
@@ -103,6 +120,31 @@ export function Manifesto() {
               </Reveal>
             ))}
           </div>
+        </div>
+
+        <div className="practice-split">
+          <Reveal className="practice-split__col">
+            <p className="mono-label">What I do</p>
+            <ul>
+              {whatIDo.map((item) => (
+                <li key={item}>
+                  <span className="practice-split__tick" aria-hidden="true">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal className="practice-split__col" delay={0.08}>
+            <p className="mono-label">How I work</p>
+            <ol>
+              {howIWork.map((item, index) => (
+                <li key={item}>
+                  <span className="practice-split__num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  {item}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
       </div>
     </section>
