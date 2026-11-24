@@ -8,6 +8,7 @@ const groupIndex: Record<string, string> = {
   'Test management': 'A',
   'API & performance': 'B',
   'Data, devices & monitoring': 'C',
+  'Automation & AI': 'D',
 };
 
 export function ToolsSection() {
@@ -15,7 +16,7 @@ export function ToolsSection() {
     <section className="tools-section section" id="toolkit" aria-labelledby="toolkit-title">
       <div className="shell">
         <SectionHeading
-          index="007"
+          index="008"
           eyebrow="Core toolkit"
           title={
             <>
@@ -29,7 +30,7 @@ export function ToolsSection() {
             <>
               <p>
                 Tools from my day-to-day QA work: test management, API and payment checks, performance runs, data
-                queries, device coverage and error monitoring.
+                queries, device coverage, error monitoring, and AI-assisted Playwright automation.
               </p>
               <p className="small-note">Marks are shown in a unified monochrome treatment.</p>
             </>
@@ -80,7 +81,7 @@ export function ToolsSection() {
               state.
             </p>
             <div className="skills-board__footer">
-              <span className="mono-label">Manual QA / continuous learning</span>
+              <span className="mono-label">Manual & AI-assisted QA</span>
               <span className="skills-board__line" aria-hidden="true" />
             </div>
           </Reveal>

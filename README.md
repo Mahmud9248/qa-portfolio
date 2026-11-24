@@ -1,4 +1,4 @@
-# Abdullah Al Mahmud — Manual QA Portfolio
+# Abdullah Al Mahmud — QA Portfolio
 
 A dark, editorial portfolio for a manual software quality assurance engineer. The site pairs a detailed professional record with three interactive QA case dossiers and a searchable library of sample artifacts.
 
@@ -95,7 +95,7 @@ Content is data-driven. Edit the relevant file under `src/data/` rather than dup
 
 - Employment history, education, tools and contact details come from the supplied résumé.
 - SAIL AI is credited only as a platform to which Abdullah contributed QA. It won the **Realcomm Digie Award 2023 (Best Tech Innovation)**. The site does not claim that he personally won the award.
-- No employer project, metric, testimonial, certification, award or automation skill has been invented.
+- No employer project, metric, testimonial, certification or award has been invented. Automation claims come only from the public [mpl-registration-qa](https://github.com/Mahmud9248/mpl-registration-qa) repo and are kept out of employer job descriptions.
 - Phone is stored in `siteConfig.phone` but is hidden by default. Set `display: true` only when the number should be public.
 - If case-study or artifact copy is replaced, keep the demonstration disclaimer accurate. Do not present fictional scenarios as client work.
 
@@ -134,7 +134,7 @@ Employer marks are applied as CSS masks by `src/components/ui/CompanyLogo.tsx`. 
 - **Motion:** MotionConfig follows the user's reduced-motion preference; CSS also disables non-essential animation and scanning effects under `prefers-reduced-motion`.
 - **Semantics:** skip link, landmarks, labelled controls, visible focus, native dialog semantics and table captions/regions.
 
-Manual QA is the subject of the site. No automated-testing expertise is implied by the demos.
+The demos show manual QA technique. Automation is shown only through the real, public mpl-registration-qa project on the home page (`src/components/home/ProjectSection.tsx`); keep its copy in line with that repo.
 
 ---
 

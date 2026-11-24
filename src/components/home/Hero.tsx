@@ -46,7 +46,7 @@ export function Hero() {
               <span className="eyebrow__mark" aria-hidden="true" />
               {siteConfig.roleShort} / since {siteConfig.testingSince}
             </p>
-            <span className="hero__eyebrow-role">SaaS · FinTech · AI</span>
+            <span className="hero__eyebrow-role">{siteConfig.specialty}</span>
           </motion.div>
 
           <motion.div

@@ -50,7 +50,7 @@ export function LifecycleSection() {
     <section className="lifecycle-section section" id="workflow" aria-labelledby="workflow-title">
       <div className="shell">
         <SectionHeading
-          index="005"
+          index="006"
           eyebrow="Working method"
           title={
             <>

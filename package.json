@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Portfolio of Abdullah Al Mahmud — Manual Software Quality Assurance Engineer.",
+  "description": "Portfolio of Abdullah Al Mahmud — Software QA Engineer, manual and AI-assisted automation testing.",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc --noEmit",

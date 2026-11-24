@@ -6,6 +6,7 @@ import { CaseStudiesPreview } from '../components/home/CaseStudiesPreview';
 import { ArtifactPreview } from '../components/home/ArtifactPreview';
 import { ToolsSection } from '../components/home/ToolsSection';
 import { ExperiencePreview } from '../components/home/ExperiencePreview';
+import { ProjectSection } from '../components/home/ProjectSection';
 import { ContactCTA } from '../components/home/ContactCTA';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { siteConfig } from '../data/site';
@@ -22,6 +23,7 @@ export function HomePage() {
       <Hero />
       <Manifesto />
       <ExperiencePreview />
+      <ProjectSection />
       <CaseStudiesPreview />
       <ExecutionLab />
       <LifecycleSection />
