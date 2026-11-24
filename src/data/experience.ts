@@ -70,6 +70,9 @@ export const skills = [
       'Exploratory testing',
       'Boundary & edge-case analysis',
       'Cross-browser & compatibility testing',
+      'Real iOS / Android device testing',
+      'AI-assisted Playwright automation',
+      'Accessibility testing (WCAG, axe-core)',
       'Agile / Scrum delivery',
     ],
   },
@@ -79,6 +82,7 @@ export const skills = [
       'REST API validation',
       'Authentication & authorization checks',
       'Data integrity validation',
+      'Test data preparation with SQL',
       'SQL / MySQL queries',
       'Performance testing',
       'Amazon Redshift data checks',
@@ -87,7 +91,9 @@ export const skills = [
   {
     title: 'Release & collaboration',
     items: [
+      'Shift-left requirement & design reviews',
       'Risk-based release validation',
+      'Feature-flag & A/B variant validation',
       'Test planning & case design',
       'Defect triage & tracking',
       'UAT support',

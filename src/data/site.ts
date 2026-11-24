@@ -6,6 +6,8 @@ export interface SiteConfig {
   role: string;
   /** Short form for tight spaces (header, chips). */
   roleShort: string;
+  /** How the work is done, shown under the role in the hero. */
+  specialty: string;
   location: string;
   locationShort: string;
   timezone: string;
@@ -43,6 +45,7 @@ export const siteConfig: SiteConfig = {
   initials: 'AAM',
   role: 'Software Quality Assurance Engineer',
   roleShort: 'SQA Engineer',
+  specialty: 'Manual & AI-assisted automation testing',
   location: 'Dhaka, Bangladesh',
   locationShort: 'Dhaka, BD',
   timezone: 'UTC+6',
@@ -58,7 +61,7 @@ export const siteConfig: SiteConfig = {
   heroSupport:
     'Software QA engineer testing SaaS, AI-powered and FinTech products since December 2021. Most recently at WalletHub, validating financial workflows, REST APIs and Stripe billing; before that, four years at Codemen Solutions, from SQA intern to Software Quality Assurance Engineer.',
   intro:
-    'I test the paths between what a product promises and what a person actually experiences. My work spans functional, regression, exploratory and REST API testing across web and mobile, with a focus on financial accuracy, release stability and clear defect evidence.',
+    'I test the paths between what a product promises and what a person actually experiences. My work spans functional, regression, exploratory and REST API testing across web and mobile, with a focus on financial accuracy, release stability and clear defect evidence. I also use LLM agents with Playwright MCP to explore apps and draft Playwright (Python) tests, and I review every result myself.',
   status: {
     open: true,
     label: 'Open to QA roles',

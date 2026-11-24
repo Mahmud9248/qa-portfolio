@@ -7,7 +7,7 @@ export function CaseStudiesPreview() {
     <section className="case-preview section" id="case-studies" aria-labelledby="case-studies-title">
       <div className="shell">
         <SectionHeading
-          index="003"
+          index="004"
           eyebrow="Selected dossiers"
           title={
             <>

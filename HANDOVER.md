@@ -23,7 +23,7 @@ A complete static portfolio for a Manual QA Engineer, built around Abdullah Al M
 - Cloudflare Pages-ready static output and configuration files.
 - This handover and the project `README.md`.
 
-No testimonials, certifications, automation claims or unverifiable employer metrics were added.
+No testimonials, certifications or unverifiable employer metrics were added. Automation is shown only through the public mpl-registration-qa project.
 
 ---
 
@@ -178,7 +178,7 @@ SEO initially failed because `/robots.txt` fell through the SPA fallback. A vali
 - **SAIL AI award attribution is accurate:** Abdullah contributed to QA of SAIL AI, which received the Realcomm Digie Award 2023 (Best Tech Innovation). The site does not claim he personally received the award.
 - The three case studies and ten artifacts are explicitly described as fictional portfolio demonstrations. No employer project, customer data, endpoint or production metric is claimed.
 - Phone number is stored in site configuration but hidden (`display: false`).
-- The site correctly represents his discipline as manual QA; no automation expertise is implied.
+- The site represents his discipline as manual and AI-assisted automation testing; automation evidence comes from the public mpl-registration-qa repo, not employer work.
 
 ---
 
